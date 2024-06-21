@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Player API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /api/players:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlayerDto'
+                type: array
+          description: A list of players
+      summary: Get all players
+      x-accepts: application/json
+  /api/player/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Player deleted
+        "404":
+          description: Player not found
+      summary: Delete player by ID
+      x-accepts: application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDto'
+          description: A player
+        "404":
+          description: Player not found
+      summary: Get player by ID
+      x-accepts: application/json
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerDto'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDto'
+          description: Updated player
+        "404":
+          description: Player not found
+      summary: Update player by ID
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/player:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerDto'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerDto'
+          description: Created player
+      summary: Create a new player
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    PlayerDto:
+      example:
+        firstName: firstName
+        lastName: lastName
+        id: 0
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+      type: object

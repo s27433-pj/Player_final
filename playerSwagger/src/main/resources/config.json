@@ -1,0 +1,10 @@
+{
+  "apiPackage": "com.example.players.api",
+  "modelPackage": "com.example.players.model",
+  "hideGenerationTimestamp": true,
+  "useBeanValidation": true,
+  "interfaceOnly": true,
+  "defaultInterfaces": false,
+  "skipDefaultInterface": true,
+  "java8": true
+}
